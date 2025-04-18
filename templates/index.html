@@ -1,18 +1,14 @@
 
 {% extends 'base.html' %}
 {% block content %}
-<h1>Доступные туры</h1>
+<h1>Туры</h1>
 {% for tour in tours %}
 <div>
   <h2>{{ tour.title }}</h2>
   <img src="{{ url_for('static', filename=tour.image) }}" width="200">
   <p>{{ tour.description }}</p>
   <p><b>{{ tour.price }} ₸</b></p>
-  <form method="post" action="/book/{{ tour.id }}">
-    <input name="name" placeholder="Ваше имя">
-    <input name="phone" placeholder="Телефон">
-    <button>Забронировать</button>
-  </form>
+  <a href="/tour/{{ tour.id }}">Подробнее</a>
 </div>
 {% endfor %}
 {% endblock %}

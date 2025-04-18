@@ -1,1 +1,16 @@
-{% extends 'base.html' %}{% block content %}Тур{% endblock %}
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ tour.title }}</h1>
+<img src="{{ url_for('static', filename=tour.image) }}" width="300">
+<p>{{ tour.description }}</p>
+<p><b>{{ tour.price }} ₸</b></p>
+<form method="post">
+  <input name="name" placeholder="Имя">
+  <input name="phone" placeholder="Телефон">
+  <input name="date" placeholder="Дата">
+  <input name="people" placeholder="Число человек">
+  <textarea name="comment" placeholder="Комментарий"></textarea>
+  <button>Забронировать</button>
+</form>
+{% endblock %}
