@@ -1,1 +1,19 @@
-{% extends 'base.html' %}{% block content %}Admin{% endblock %}
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>Админка</h1>
+<form method="POST" action="/upload" enctype="multipart/form-data">
+  <input type="file" name="image">
+  <button>Загрузить фото</button>
+</form>
+<form method="POST" action="/add">
+  <input name="title" placeholder="Название">
+  <input name="price" placeholder="Цена">
+  <input name="image" placeholder="Имя файла (например maldives.jpg)">
+  <input name="description" placeholder="Описание">
+  <button>Добавить тур</button>
+</form>
+{% for tour in tours %}
+  <p>{{ tour.title }} - {{ tour.price }} ₸</p>
+{% endfor %}
+{% endblock %}
