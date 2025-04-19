@@ -67,7 +67,7 @@ def add():
         })
         save_tours(tours)
         return redirect('/admin')
-    return render_template('edit.html', tour=None)
+    return render_template('edit.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
