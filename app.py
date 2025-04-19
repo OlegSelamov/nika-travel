@@ -25,19 +25,21 @@ def index():
     tours = load_tours()
     return render_template('index.html', tours=tours)
 
-@app.route('/tour/<int:tour_id>', methods=['GET', 'POST'])
+@app.route('/book/<int:tour_id>', methods=['POST'])
+def book(tour_id):
+    name = request.form['name']
+    phone = request.form['phone']
+    message = f"📩 Новая заявка\nИмя: {name}\nТелефон: {phone}\nТур ID: {tour_id}"
+    requests.get(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", params={
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message
+    })
+    return redirect(url_for('index'))
+
+@app.route('/tour/<int:tour_id>')
 def tour(tour_id):
     tours = load_tours()
-    tour = next((t for t in tours if t["id"] == tour_id), None)
-    if request.method == 'POST':
-        name = request.form['name']
-        phone = request.form['phone']
-        date = request.form['date']
-        people = request.form['people']
-        comment = request.form['comment']
-        text = f"📩 Заявка\nТур: {tour['title']}\nИмя: {name}\nТелефон: {phone}\nДата: {date}\nКол-во человек: {people}\nКомментарий: {comment}"
-        requests.get(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", params={"chat_id": TELEGRAM_CHAT_ID, "text": text})
-        return redirect(url_for('index'))
+    tour = next((t for t in tours if t['id'] == tour_id), None)
     return render_template('tour.html', tour=tour)
 
 @app.route('/admin')

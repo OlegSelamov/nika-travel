@@ -1,1 +1,23 @@
-<!DOCTYPE html><html><head><link rel='stylesheet' href='/static/css/style.css'></head><body>{% block content %}{% endblock %}</body></html>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Nika Travel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Nika Travel</a></h1>
+        {% if session.admin %}
+            <a href="/admin">Админка</a>
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Nika Travel</p>
+    </footer>
+</body>
+</html>
